@@ -1,32 +1,10 @@
 window.onload = function () {
+  var alphabet = ['А', 'О', 'У', 'Э', 'Ө', 'Ү', 'Ы', 'И', 'Й', 'Я', 'Е', 'Ё', 'Ю', 'Б', 'В', 'Г', 'Д', 'Ж', 'З', 'К', 'Л', 'М', 'Н'
+                  , 'П', 'Р', 'С', 'Т', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'щ', 'ь', 'ъ'];
 
-  var alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
-        'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
-        'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-  
-  var categories;         // Array of topics
-  var chosenCategory;     // Selected catagory
-  var getHint ;          // Word getHint
-  var word ;              // Selected word
-  var guess ;             // Geuss
-  var geusses = [ ];      // Stored geusses
-  var lives ;             // Lives
-  var counter ;           // Count correct geusses
-  var space;              // Number of spaces in word '-'
-
-  // Get elements
-  var showLives = document.getElementById("mylives");
-  var showCatagory = document.getElementById("scatagory");
-  var getHint = document.getElementById("hint");
-  var showClue = document.getElementById("clue");
-
-
-
-  // create alphabet ul
   var buttons = function () {
     myButtons = document.getElementById('buttons');
     letters = document.createElement('ul');
-
     for (var i = 0; i < alphabet.length; i++) {
       letters.id = 'alphabet';
       list = document.createElement('li');
@@ -37,185 +15,104 @@ window.onload = function () {
       letters.appendChild(list);
     }
   }
-    
-  
-  // Select Catagory
-  var selectCat = function () {
-    if (chosenCategory === categories[0]) {
-      catagoryName.innerHTML = "LOCATED IN ASIA";
-    } else if (chosenCategory === categories[1]) {
-      catagoryName.innerHTML = "LOCATED IN EU";
-    } else if (chosenCategory === categories[2]) {
-      catagoryName.innerHTML = "LOCATED IN AMERICA";
-    }
-  }
 
-  // Create geusses ul
-   result = function () {
-    wordHolder = document.getElementById('hold');
-    correct = document.createElement('ul');
+var programming_languages = [
+	"python",
+	"javascript",
+	"mongodb",
+	"json",
+	"java",
+	"html",
+	"css",
+	"c",
+	"csharp",
+	"golang",
+	"kotlin",
+	"php",
+	"sql",
+	"ruby"
+]
 
-    for (var i = 0; i < word.length; i++) {
-      correct.setAttribute('id', 'my-word');
-      guess = document.createElement('li');
-      guess.setAttribute('class', 'guess');
-      if (word[i] === "-") {
-        guess.innerHTML = "-";
-        space = 1;
-      } else {
-        guess.innerHTML = "_";
-      }
+let answer = '';
+let maxWrong = 6;
+let mistakes = 0;
+let guessed = [];
+let wordStatus = null;
 
-      geusses.push(guess);
-      wordHolder.appendChild(correct);
-      correct.appendChild(guess);
-    }
-  }
-  
-  // Show lives
-   comments = function () {
-    showLives.innerHTML = "You have " + lives + " lives";
-    if (lives < 1) {
-      alert("GAME OVER!");
-      correct.parentNode.removeChild(correct);
-      letters.parentNode.removeChild(letters);
-      showClue.innerHTML = "";
-      context.clearRect(0, 0, 400, 400);
-      play();
-    }
-    for (var i = 0; i < geusses.length; i++) {
-      if (counter + space === geusses.length) {
-          alert("YOU WIN!");
-          correct.parentNode.removeChild(correct);
-          letters.parentNode.removeChild(letters);
-          showClue.innerHTML = "";
-          context.clearRect(0, 0, 400, 400);
-          play();
-      }
-    }
-  }
-
-      // Animate man
-  var animate = function () {
-    var drawMe = lives ;
-    drawArray[drawMe]();
-  }
-
-  
-   // Hangman
-  canvas =  function(){
-
-    myStickman = document.getElementById("stickman");
-    context = myStickman.getContext('2d');
-    context.beginPath();
-    context.strokeStyle = "#fff";
-    context.lineWidth = 2;
-  };
-  draw = function($pathFromx, $pathFromy, $pathTox, $pathToy) {
-    context.moveTo($pathFromx, $pathFromy);
-    context.lineTo($pathTox, $pathToy);
-    context.stroke(); 
+function randomWord() {
+  answer = programming_languages[Math.floor(Math.random() * programming_languages.length)];
 }
 
-   frame1 = function() {
-     draw (0, 150, 150, 150);
-     draw (10, 0, 10, 600);
-   };
-   
-   frame2 = function() {
-      draw (0, 5, 70, 5);
-      draw (60, 5, 60, 15);
-   };
-   torso = function() {
-     draw (60, 36, 60, 70); 
-     myStickman = document.getElementById("stickman");
-     context = myStickman.getContext('2d');
-     context.beginPath();
-     context.arc(60, 25, 10, 0, Math.PI*2, true);
-     context.stroke();
-   };
-   Arms = function() {
-     draw (60, 46, 100, 50);
-     draw (60, 46, 20, 50);
-   };
-  Legs = function() {
-     draw (60, 70, 100, 100);
-     draw (60, 70, 20, 100);
-   };
-  
-  drawArray = [Legs, Arms,  torso, frame2, frame1]; 
+function generateButtons() {
+  let buttonsHTML = 'abcdefghijklmnopqrstuvwxyz'.split('').map(letter =>
+    `
+      <button
+        class="btn btn-lg btn-primary m-2"
+        id='` + letter + `'
+        onClick="handleGuess('` + letter + `')"
+      >
+        ` + letter + `
+      </button>
+    `).join('');
 
+  document.getElementById('keyboard').innerHTML = buttonsHTML;
+}
 
-  // OnClick Function
-   check = function () {
-    list.onclick = function () {
-      var geuss = (this.innerHTML);
-      this.setAttribute("class", "active");
-      this.onclick = null;
-      for (var i = 0; i < word.length; i++) {
-        if (word[i] === geuss) {
-          geusses[i].innerHTML = geuss;
-          counter += 1;
-        } 
-      }
-      var j = (word.indexOf(geuss));
-      if (j === -1) {
-        lives --;
-        animate();
-        comments();
-      } else {
-        comments();
-      }
-    }
-  }
-  
-    
-  // Play
-  play = function () {
-    categories = [
-        ["ULAANBAATAR", "TOKYO", "SEOUL", "BEIJING", "HONGKONG"],
-        ["LONDON", "PARIS", "BERLIN", "ROME", "MADRID"],
-        ["LIMA", "WASHINGTON", "BRASILIA", "LAPAZ", "SANTIAGO"]
-    ];
+function handleGuess(chosenLetter) {
+  guessed.indexOf(chosenLetter) === -1 ?guessed.push(chosenLetter) : null;
+  document.getElementById(chosenLetter).setAttribute('disabled', true);
 
-    chosenCategory = categories[Math.floor(Math.random() * categories.length)];
-    word = chosenCategory[Math.floor(Math.random() * chosenCategory.length)];
-    console.log(word);
-    buttons();
-
-    geusses = [ ];
-    lives = 5;
-    counter = 0;
-    space = 0;
-    result();
-    comments();
-    selectCat();
-    canvas();
-  }
-
-  play();
-  
-  // Hint
-
-    hint.onclick = function() {
-
-      hints = [
-        ["LOCATED IN ASIA","LOCATED IN ASIA","LOCATED IN ASIA","LOCATED IN ASIA","LOCATED IN ASIA"],
-        ["LOCATED IN EUROPE","LOCATED IN EUROPE","LOCATED IN EUROPE","LOCATED IN EUROPE","LOCATED IN EUROPE"],
-        ["LOCATED IN AMERICA","LOCATED IN AMERICA","LOCATED IN AMERICA","LOCATED IN AMERICA","LOCATED IN AMERICA"]
-    ];
-
-    var catagoryIndex = categories.indexOf(chosenCategory);
-    var hintIndex = chosenCategory.indexOf(word);
-    showClue.innerHTML = "Clue: - " +  hints [catagoryIndex][hintIndex];
-  };
-  document.getElementById('reset').onclick = function() {
-    correct.parentNode.removeChild(correct);
-    letters.parentNode.removeChild(letters);
-    showClue.innerHTML = "";
-    context.clearRect(0, 0, 400, 400);
-    play();
+  if (answer.indexOf(chosenLetter) >= 0) {
+    guessedWord();
+    checkIfGameWon();
+  } else if (answer.indexOf(chosenLetter) === -1) {
+    mistakes++;
+    updateMistakes();
+    checkIfGameLost();
+    updateHangmanPicture();
   }
 }
 
+function updateHangmanPicture() {
+  document.getElementById('hangmanPic').src = './images/' + mistakes + '.png';
+}
 
+function checkIfGameWon() {
+  if (wordStatus === answer) {
+    document.getElementById('keyboard').innerHTML = 'You Won!!!';
+  }
+}
+
+function checkIfGameLost() {
+  if (mistakes === maxWrong) {
+    document.getElementById('wordSpotlight').innerHTML = 'The answer was: ' + answer;
+    document.getElementById('keyboard').innerHTML = 'You Lost!!!';
+  }
+}
+
+function guessedWord() {
+  wordStatus = answer.split('').map(letter => (guessed.indexOf(letter) >= 0 ? letter : " _ ")).join('');
+
+  document.getElementById('wordSpotlight').innerHTML = wordStatus;
+}
+
+function updateMistakes() {
+  document.getElementById('mistakes').innerHTML = mistakes;
+}
+
+function reset() {
+  mistakes = 0;
+  guessed = [];
+  document.getElementById('hangmanPic').src = '/images/0.png';
+  randomWord();
+  guessedWord();
+  updateMistakes();
+  generateButtons();
+}
+
+document.getElementById('maxWrong').innerHTML = maxWrong;
+
+randomWord();
+generateButtons();
+guessedWord();
+}

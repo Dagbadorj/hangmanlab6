@@ -1,81 +1,5 @@
 body {
-  background-color: black;
-  font-style: Futura;
-  width: 100%;
-  height: 900px;
-  margin: auto;
-}
-.Asuult {
-  width: 100%;
-  height: 20%;
-}
-.body {
-  width: 100%;
-  height: 80%;
-  background-color: white;
-}
-.lbody {
-  width: 55%;
-  height: 100%;
-  float: left;
-  background-color: white;
-}
-.hangman {
-  width: 100%;
-  height: 70%;
-  float: left;
-  background-color: black;
-}
-.lives {
-  width: 100%;
-  height: 30%;
-  float: left;
-  background-color: black;
-}
-.rbody {
-  width: 45%;
-  height: 100%;
-  float: left;
-  background-color: white;
-}
-.answerh {
-  width: 100%;
-  height: 30%;
-  float: left;
-  background-color: white;
-}
-.answer {
-  width: 100%;
-  height: 20%;
-  float: left;
-  background-color: white;
-}
-.tovchluur {
-  width: 100%;
-  height: 45%;
-  float: left;
-  background-color: white;
-}
-.tovchluur a {
-  text-decoration: none;
-  color: black;
-  font-weight: 700;
-  text-align: center;
-  line-height: 25px;
-  margin: 5px;
-  width: 25px;
-  height: 25px;
-  border: 1px solid black;
-  display: inline-block;
-}
-.bottombar {
-  width: 100%;
-  height: 5%;
-  float: left;
-  background-color: chocolate;
-}
-body {
-  background: #c1d72e;
+  background: #f4d03f;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue",
     Helvetica, Arial, "Lucida Grande", sans-serif;
   color: #fff;
@@ -83,9 +7,35 @@ body {
   text-align: center;
   font-size: 18px;
 }
+.wrappper {
+  width: 100%;
+  margin: 0 auto;
+}
+.rbody {
+  width: 45%;
+  height: 100%;
+  float: right;
+}
+#hold {
+  border: violet;
+  border-radius: 5px;
+}
+.lbody {
+  width: 55%;
+  height: 100%;
+  float: left;
+}
+.wrappper:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 canvas {
-  color: #fff;
-  border: #fff dashed 2px;
+  width: 50%;
+  height: 40%;
+  color: white;
+  border: white dashed 5px;
   padding: 15px;
 }
 
@@ -94,26 +44,25 @@ h2,
 h3 {
   font-family: "Roboto", sans-serif;
   font-weight: 100;
-  text-transform: uppercase;
   margin: 5px 0;
 }
 
 h1 {
-  font-size: 2.6em;
+  font-size: 50px;
 }
 
 h2 {
-  font-size: 1.6em;
+  font-size: 30px;
 }
 
 p {
-  font-size: 1.6em;
+  font-size: 30px;
 }
 
 #alphabet {
-  margin: 15px auto;
+  margin: 20px auto;
   padding: 0;
-  max-width: 900px;
+  max-width: 600px;
 }
 #alphabet:after {
   content: "";
@@ -128,19 +77,19 @@ p {
   width: 35px;
   height: 30px;
   padding-top: 10px;
-  background: #fff;
-  color: #c1d72e;
+  background: white;
+  color: black;
   cursor: pointer;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   border-radius: 5px;
   -khtml-border-radius: 5px;
-  border: solid 1px #fff;
+  border: solid 1px white;
 }
 #alphabet li:hover {
-  background: #c1d72e;
-  border: solid 1px #fff;
-  color: #fff;
+  background: #a0a09f;
+  border: solid 1px white;
+  color: white;
 }
 
 #my-word {
@@ -156,7 +105,7 @@ p {
   margin: 0;
   display: inline-block;
   padding: 0 10px;
-  font-size: 1.6em;
+  font-size: 50px;
 }
 
 .active {
@@ -179,9 +128,11 @@ p {
 }
 
 #mylives {
-  font-size: 1.6em;
+  font-size: 20px;
   text-align: center;
   display: block;
+  font-size: 50px;
+  color: cadetblue;
 }
 
 button {
@@ -189,7 +140,7 @@ button {
   -webkit-border-radius: 5px;
   border-radius: 5px;
   -khtml-border-radius: 5px;
-  background: #c1d72e;
+  background: greenyellow;
   color: #fff;
   border: solid 1px #fff;
   text-decoration: none;
@@ -200,13 +151,21 @@ button {
   margin: 10px;
   outline: none;
 }
-button:hover {
+button#hint:hover {
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
-  background: #fff;
+  background: white;
+  border: solid 1px white;
+  color: greenyellow;
+}
+button#reset:hover {
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  background: red;
   border: solid 1px #fff;
-  color: #c1d72e;
+  color: greenyellow;
 }
 
 @media (max-width: 767px) {

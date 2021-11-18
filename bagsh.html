@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Yanztai goy JS Lesson 2. Event, Function, Array</title>
+	<style>
+	body {
+		background-color: gray;
+	}
+		h1 {
+			text-align: center;
+		}
+		.bazka {
+			margin: 0px auto;
+			padding: 50px;
+			width: 200px;
+			background-color: white;
+		}
+		.bazka a {
+			text-decoration: none;
+			color: black;
+			font-weight: 700;
+			text-align: center;
+			line-height: 50px;
+			margin: 5px;
+			width: 50px;
+			height: 50px;
+			border: 1px solid black;
+			display: inline-block;
+		}
+		#result {
+			background-color: gray;
+			padding: 5px 10px;
+			color: white;
+		}
+	</style>
+</head>
+<body>
+<h1>Cool Calculator V 0.0.0.12</h1>
+<div class="bazka">
+	<p id="result">Result</p>
+	<a href="#" onclick="uildel('/');">/</a>
+	<a href="#" onclick="uildel('*');">*</a>
+	<a href="#" onclick="uildel('-');">-</a>
+	<br>
+	<a href="#" onclick="manaitoo(7);">7</a>
+	<a href="#" onclick="manaitoo(8);">8</a>
+	<a href="#" onclick="manaitoo(9);">9</a>
+	<br>
+	<a href="#" onclick="manaitoo(4);">4</a>
+	<a href="#" onclick="manaitoo(5);">5</a>
+	<a href="#" onclick="manaitoo(6);">6</a>
+	<br>
+	<a href="#" onclick="manaitoo(1);">1</a>
+	<a href="#" onclick="manaitoo(2);">2</a>
+	<a href="#" onclick="manaitoo(3);">3</a>
+	<br>
+	<a href="#" onclick="manaitoo(0);">0</a>
+	<a href="#" onclick="uildel('+');">+</a>
+	<a href="#" onclick="hariu();">=</a>
+</div>
+<script>
+	var esenbek = [0, 'tasaldag', 'hotsordog', 'targalaadbga']; 
+	
+	for(var i=0; i< esenbek.length; i++){
+		alert(esenbek[i]);
+	}
+
+	var dorjoo = '';
+	var nanzaa = '';
+	var lhamaa = '';
+	function manaitoo(nuguutoo){
+		nanzaa = nanzaa + nuguutoo;
+		document.getElementById('result').innerHTML = nanzaa;
+	}
+	function uildel(uildel){
+		lhamaa = uildel;
+		dorjoo = nanzaa;
+		nanzaa = '';
+		document.getElementById('result').innerHTML = uildel;
+	}
+	function hariu(){
+		if(lhamaa == '+'){
+			document.getElementById('result').innerHTML = parseFloat(dorjoo)+parseFloat(nanzaa);
+		} else if(lhamaa == '-'){
+			document.getElementById('result').innerHTML = parseFloat(dorjoo)-parseFloat(nanzaa);
+		} else if(lhamaa == '*'){
+			document.getElementById('result').innerHTML = parseFloat(dorjoo)*parseFloat(nanzaa);
+		} else if(lhamaa == '/'){
+			document.getElementById('result').innerHTML = parseFloat(dorjoo)/parseFloat(nanzaa);
+		}
+		
+	}
+</script>
+</body>
+</html>
