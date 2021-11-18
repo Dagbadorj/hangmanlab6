@@ -1,7 +1,5 @@
 body {
   background: #f4d03f;
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue",
-    Helvetica, Arial, "Lucida Grande", sans-serif;
   color: #fff;
   height: 100%;
   text-align: center;
@@ -41,7 +39,6 @@ canvas {
 h1,
 h2,
 h3 {
-  font-family: "Roboto", sans-serif;
   font-weight: 100;
   margin: 5px 0;
 }
@@ -55,6 +52,7 @@ h2 {
 }
 
 p {
+  border: violet;
   font-size: 30px;
 }
 
@@ -70,20 +68,20 @@ p {
 }
 
 #alphabet li {
-  float: left;
-  margin: 0 10px 10px 0;
-  list-style: none;
-  width: 35px;
-  height: 30px;
-  padding-top: 10px;
   background: white;
   color: black;
   cursor: pointer;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
   border-radius: 5px;
-  -khtml-border-radius: 5px;
-  border: solid 1px white;
+  text-decoration: none;
+  color: black;
+  font-weight: 700;
+  text-align: center;
+  line-height: 50px;
+  margin: 5px;
+  width: 50px;
+  height: 50px;
+  border: 1px solid white;
+  display: inline-block;
 }
 #alphabet li:hover {
   background: #a0a09f;
@@ -115,14 +113,6 @@ p {
   transition: all 0.3s ease-in-out;
   cursor: default;
 }
-.active:hover {
-  transition: all 1s ease-in;
-  transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
-  opacity: 0.4;
-  filter: alpha(opacity=40);
-}
-
 #mylives {
   font-size: 20px;
   text-align: center;
@@ -167,8 +157,6 @@ button#reset:hover {
 @media (max-width: 850px) {
   body {
     background: #f4d03f;
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue",
-      Helvetica, Arial, "Lucida Grande", sans-serif;
     color: #fff;
     height: 100%;
     text-align: center;
@@ -208,7 +196,6 @@ button#reset:hover {
   h1,
   h2,
   h3 {
-    font-family: "Roboto", sans-serif;
     font-weight: 100;
     margin: 5px 0;
   }
@@ -237,6 +224,10 @@ button#reset:hover {
   }
 
   #alphabet li {
+    background: white;
+    color: black;
+    cursor: pointer;
+    border-radius: 5px;
     text-decoration: none;
     color: black;
     font-weight: 700;
@@ -245,7 +236,7 @@ button#reset:hover {
     margin: 5px;
     width: 50px;
     height: 50px;
-    border: 1px solid black;
+    border: 1px solid white;
     display: inline-block;
   }
   #alphabet li:hover {
@@ -278,14 +269,6 @@ button#reset:hover {
     transition: all 0.3s ease-in-out;
     cursor: default;
   }
-  .active:hover {
-    transition: all 1s ease-in;
-    transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-    opacity: 0.4;
-    filter: alpha(opacity=40);
-  }
-
   #mylives {
     font-size: 20px;
     text-align: center;
@@ -293,7 +276,6 @@ button#reset:hover {
     font-size: 50px;
     color: cadetblue;
   }
-
   button {
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
@@ -333,8 +315,6 @@ button#reset:hover {
 @media (max-width: 480px) {
   body {
     background: #f4d03f;
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue",
-      Helvetica, Arial, "Lucida Grande", sans-serif;
     color: #fff;
     height: 100%;
     text-align: center;
@@ -350,7 +330,6 @@ button#reset:hover {
     float: right;
   }
   #hold {
-    border: violet;
     border-radius: 5px;
   }
   .lbody {
@@ -374,7 +353,6 @@ button#reset:hover {
   h1,
   h2,
   h3 {
-    font-family: "Roboto", sans-serif;
     font-weight: 100;
     margin: 5px 0;
   }
@@ -389,6 +367,7 @@ button#reset:hover {
 
   p {
     font-size: 30px;
+    color: violet;
   }
 
   #alphabet {
@@ -403,6 +382,10 @@ button#reset:hover {
   }
 
   #alphabet li {
+    background: white;
+    color: black;
+    cursor: pointer;
+    border-radius: 5px;
     text-decoration: none;
     color: black;
     font-weight: 700;
@@ -411,7 +394,7 @@ button#reset:hover {
     margin: 5px;
     width: 50px;
     height: 50px;
-    border: 1px solid black;
+    border: 1px solid white;
     display: inline-block;
   }
   #alphabet li:hover {
@@ -444,14 +427,6 @@ button#reset:hover {
     transition: all 0.3s ease-in-out;
     cursor: default;
   }
-  .active:hover {
-    transition: all 1s ease-in;
-    transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-    opacity: 0.4;
-    filter: alpha(opacity=40);
-  }
-
   #mylives {
     font-size: 20px;
     text-align: center;
@@ -494,9 +469,5 @@ button#reset:hover {
   }
   #alphabet {
     padding: 0 0 0 15px;
-  }
-}
-  #alphabet {
-    padding: 0 0 0 25px;
   }
 }

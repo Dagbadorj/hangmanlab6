@@ -56,9 +56,9 @@ window.onload = function () {
    }
  }
   comments = function () {
-   showLives.innerHTML = "You have " + lives + " lives";
+   showLives.innerHTML = "Таньд " + lives + " ширхэг амь байна.";
    if (lives <=0) {
-     alert("GAME OVER!");
+     alert("Та ялагдлаа!");
      correct.parentNode.removeChild(correct);
      letters.parentNode.removeChild(letters);
      showClue.innerHTML = "";
@@ -67,7 +67,7 @@ window.onload = function () {
    }
    for (var i = 0; i < geusses.length; i++) {
      if (counter + space === geusses.length) {
-         alert("YOU WIN!");
+         alert("Та яллаа!");
          correct.parentNode.removeChild(correct);
          letters.parentNode.removeChild(letters);
          showClue.innerHTML = "";

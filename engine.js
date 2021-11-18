@@ -1,118 +1,101 @@
-window.onload = function () {
-  var alphabet = ['А', 'О', 'У', 'Э', 'Ө', 'Ү', 'Ы', 'И', 'Й', 'Я', 'Е', 'Ё', 'Ю', 'Б', 'В', 'Г', 'Д', 'Ж', 'З', 'К', 'Л', 'М', 'Н'
-                  , 'П', 'Р', 'С', 'Т', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'щ', 'ь', 'ъ'];
-
-  var buttons = function () {
-    myButtons = document.getElementById('buttons');
-    letters = document.createElement('ul');
-    for (var i = 0; i < alphabet.length; i++) {
-      letters.id = 'alphabet';
-      list = document.createElement('li');
-      list.id = 'letter';
-      list.innerHTML = alphabet[i];
-      check();
-      myButtons.appendChild(letters);
-      letters.appendChild(list);
+const letterDiv = document.querySelector('.letters');
+const hintButton = document.querySelector('.hint');
+const resetButton = document.querySelector('.reset');
+const hintDiv = document.querySelector('.hinttext');
+const hintText = document.querySelector('.hint-txt');
+const liveSpan = document.querySelector('.lives');
+const wordDiv = document.querySelector('.word-div');
+const notif = document.querySelector('.notif');
+const notifContent = document.querySelector('.notif-content');
+const notifSpan = document.querySelector('.notif-span');
+const playAgain = document.querySelector('.notif-btn');
+let letters;
+let lives;
+const words = new Map([
+  ['test', 'a test word'],
+  ['tests', 'another test word'],
+  ['random', 'some random word'],
+]);
+const word_list = [...words.keys()];
+const getRandomWord = function (list) {
+  return list[Math.floor(Math.random() * word_list.length)];
+};
+let select_word;
+const init = function (state) {
+  wordDiv.innerHTML = '';
+  if (state === 'start') {
+    for (const i of 'abcdefghijklmnopqrstuvwxyz') {
+      const html = `<button class="alpha">${i.toUpperCase()}</button>`;
+      letterDiv.insertAdjacentHTML('beforeend', html);
+    }
+  } else if (state === 'reset') {
+    letters.forEach(btn => {
+      btn.classList.remove('disabled');
+      hintDiv.classList.add('hidden');
+      notif.classList.add('hidden');
+    });
+  }
+  select_word = getRandomWord(word_list);
+  lives = 5;
+  letters = document.querySelectorAll('.alpha');
+  liveSpan.textContent = lives;
+  for (let i = 0; i < select_word.length; i++) {
+    const html = `<p class="word">_</p>`;
+    wordDiv.insertAdjacentHTML('beforeend', html);
+  }
+};
+init('start');
+const showNotif = function (msg) {
+  notif.classList.remove('hidden');
+  notifSpan.textContent = select_word;
+  notifContent.textContent = `You ${msg}`;
+  lives = 3;
+};
+const decreaseLife = function () {
+  lives--;
+  liveSpan.textContent = lives;
+  if (lives === 0) {
+    showNotif('lost');
+  }
+};
+const getindexes = function (letter) {
+  let indexes = [];
+  [...select_word].forEach((val, i) => {
+    if (val === letter) {
+      const index = i;
+      indexes.push(index);
+    }
+  });
+  return indexes;
+};
+const checkWord = function () {
+  let val = true;
+  for (let i = 0; i < wordDiv.children.length; i++) {
+    if (wordDiv.children[i].textContent === '_') {
+      val = false;
     }
   }
-
-var programming_languages = [
-	"python",
-	"javascript",
-	"mongodb",
-	"json",
-	"java",
-	"html",
-	"css",
-	"c",
-	"csharp",
-	"golang",
-	"kotlin",
-	"php",
-	"sql",
-	"ruby"
-]
-
-let answer = '';
-let maxWrong = 6;
-let mistakes = 0;
-let guessed = [];
-let wordStatus = null;
-
-function randomWord() {
-  answer = programming_languages[Math.floor(Math.random() * programming_languages.length)];
-}
-
-function generateButtons() {
-  let buttonsHTML = 'abcdefghijklmnopqrstuvwxyz'.split('').map(letter =>
-    `
-      <button
-        class="btn btn-lg btn-primary m-2"
-        id='` + letter + `'
-        onClick="handleGuess('` + letter + `')"
-      >
-        ` + letter + `
-      </button>
-    `).join('');
-
-  document.getElementById('keyboard').innerHTML = buttonsHTML;
-}
-
-function handleGuess(chosenLetter) {
-  guessed.indexOf(chosenLetter) === -1 ?guessed.push(chosenLetter) : null;
-  document.getElementById(chosenLetter).setAttribute('disabled', true);
-
-  if (answer.indexOf(chosenLetter) >= 0) {
-    guessedWord();
-    checkIfGameWon();
-  } else if (answer.indexOf(chosenLetter) === -1) {
-    mistakes++;
-    updateMistakes();
-    checkIfGameLost();
-    updateHangmanPicture();
+  return val;
+};
+const letterPress = function () {
+  const letter = this.textContent.toLowerCase();
+  if (select_word.includes(letter)) {
+    const indexes_list = getindexes(letter);
+    indexes_list.forEach((val, i)=>{
+      wordDiv.children[val].textContent = this.textContent;
+    });
+    if (checkWord()) showNotif('won');
+  } else 
+  {
+    decreaseLife();
   }
-}
-
-function updateHangmanPicture() {
-  document.getElementById('hangmanPic').src = './images/' + mistakes + '.png';
-}
-
-function checkIfGameWon() {
-  if (wordStatus === answer) {
-    document.getElementById('keyboard').innerHTML = 'You Won!!!';
-  }
-}
-
-function checkIfGameLost() {
-  if (mistakes === maxWrong) {
-    document.getElementById('wordSpotlight').innerHTML = 'The answer was: ' + answer;
-    document.getElementById('keyboard').innerHTML = 'You Lost!!!';
-  }
-}
-
-function guessedWord() {
-  wordStatus = answer.split('').map(letter => (guessed.indexOf(letter) >= 0 ? letter : " _ ")).join('');
-
-  document.getElementById('wordSpotlight').innerHTML = wordStatus;
-}
-
-function updateMistakes() {
-  document.getElementById('mistakes').innerHTML = mistakes;
-}
-
-function reset() {
-  mistakes = 0;
-  guessed = [];
-  document.getElementById('hangmanPic').src = '/images/0.png';
-  randomWord();
-  guessedWord();
-  updateMistakes();
-  generateButtons();
-}
-
-document.getElementById('maxWrong').innerHTML = maxWrong;
-
-randomWord();
-generateButtons();
-guessedWord();
-}
+  this.classList.add('disabled');};
+letters.forEach(btn => {
+  btn.addEventListener('click', letterPress);});
+hintButton.addEventListener('click', function () {
+  hintDiv.classList.remove('hidden');
+  hintText.textContent = words.get(select_word);});
+resetButton.addEventListener('click', function () {
+  init('reset');});
+playAgain.addEventListener('click', function () {
+  init('reset');});
