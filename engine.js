@@ -12,9 +12,19 @@ const playAgain = document.querySelector('.notif-btn');
 let letters;
 let lives;
 const words = new Map([
-  ['test', 'a test word'],
-  ['tests', 'another test word'],
-  ['random', 'some random word'],
+  ['УЛААНБААТАР','АЗИ тив-д байдаг хот'], 
+  ['ТОКИО', 'АЗИ тив-д байдаг хот'],
+  ['СӨҮЛ','АЗИ тив-д байдаг хот'], 
+  ['БЭЭЖИН','АЗИ тив-д байдаг хот'],
+  ['ЛОНДОН', 'ЕФРОП тив-д байдаг хот'],
+  ['ПАРИС', 'ЕФРОП тив-д байдаг хот'],
+  ['БЭРЛИН', 'ЕФРОП тив-д байдаг хот'],
+  ['РОМ', 'ЕФРОП тив-д байдаг хот'],
+  ['МАДРИД','ЕФРОП тив-д байдаг хот'],
+  ['ЛИМА', 'АМЕРИК тив-д байдаг хот'],
+  ['ВАШИНГТОН', 'АМЕРИК тив-д байдаг хот'],
+  ['БРАЗИЛИА','АМЕРИК тив-д байдаг хот'],
+  ['ЖАКАРТА','АМЕРИК тив-д байдаг хот'],
 ]);
 const word_list = [...words.keys()];
 const getRandomWord = function (list) {
@@ -24,7 +34,7 @@ let select_word;
 const init = function (state) {
   wordDiv.innerHTML = '';
   if (state === 'start') {
-    for (const i of 'abcdefghijklmnopqrstuvwxyz') {
+    for (const i of 'АОУЭӨҮЫИЙЯЕЁЮБВГДЖЗКЛМНПРСТФХЦЧШщьъ') {
       const html = `<button class="alpha">${i.toUpperCase()}</button>`;
       letterDiv.insertAdjacentHTML('beforeend', html);
     }
