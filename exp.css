@@ -32,7 +32,7 @@ canvas {
   width: 50%;
   height: 40%;
   color: white;
-  border: white dashed 5px;
+  border: white solid 5px;
   padding: 15px;
 }
 
@@ -188,7 +188,7 @@ button#reset:hover {
     width: 50%;
     height: 40%;
     color: white;
-    border: white dashed 5px;
+    border: white solid 5px;
     padding: 15px;
   }
 
@@ -345,7 +345,7 @@ button#reset:hover {
     width: 50%;
     height: 40%;
     color: white;
-    border: white dashed 5px;
+    border: white solid 5px;
     padding: 15px;
   }
 
@@ -419,8 +419,6 @@ button#reset:hover {
   }
 
   .active {
-    opacity: 0.4;
-    filter: alpha(opacity=40);
     transition: all 1s ease-in;
     transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
@@ -446,7 +444,7 @@ button#reset:hover {
     cursor: pointer;
     font-size: 1.2em;
     padding: 18px 10px;
-    width: 180px;
+    width: 100px;
     margin: 10px;
     outline: none;
   }

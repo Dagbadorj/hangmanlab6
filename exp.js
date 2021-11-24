@@ -1,32 +1,31 @@
-window.onload = function () {
-  var alphabet = ['А', 'О', 'У', 'Э', 'Ө', 'Ү', 'Ы', 'И', 'Й', 'Я', 'Е', 'Ё', 'Ю', 'Б', 'В', 'Г', 'Д', 'Ж', 'З', 'К', 'Л', 'М', 'Н'
+var alphabet = ['А', 'О', 'У', 'Э', 'Ө', 'Ү', 'Ы', 'И', 'Й', 'Я', 'Е', 'Ё', 'Ю', 'Б', 'В', 'Г', 'Д', 'Ж', 'З', 'К', 'Л', 'М', 'Н'
                  , 'П', 'Р', 'С', 'Т', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'щ', 'ь', 'ъ'];
- var Asuult; 
- var category;    
- var hints ;      
- var word ;           
- var guess ;             
- var geusses = [ ];    
- var lives ;            
- var counter ;         
- var space;             
- var showLives = document.getElementById("mylives");
- var showCatagory = document.getElementById("scatagory");
- var hints = document.getElementById("hint");
- var showClue = document.getElementById("clue");
- var buttons = function () {
-   myButtons = document.getElementById('buttons');
-   letters = document.createElement('ul');
-   for (var i = 0; i < alphabet.length; i++) {
-     letters.id = 'alphabet';
-     list = document.createElement('li');
-     list.id = 'letter';
-     list.innerHTML = alphabet[i];
-     check();
-     myButtons.appendChild(letters);
-     letters.appendChild(list);
-   }
- }
+var Asuult; 
+var category;    
+var hints ;      
+var word ;           
+var guess ;             
+var geusses = [ ];    
+var lives ;            
+var counter ;         
+var space;             
+var showLives = document.getElementById("mylives");
+var showCatagory = document.getElementById("scatagory");
+var hints = document.getElementById("hint");
+var showClue = document.getElementById("clue");
+var buttons = function () {
+  myButtons = document.getElementById('buttons');
+  letters = document.createElement('ul');
+  for (var i = 0; i < alphabet.length; i++) {
+    letters.id = 'alphabet';
+    list = document.createElement('li');
+    list.id = 'letter';
+    list.innerHTML = alphabet[i];
+    check();
+    myButtons.appendChild(letters);
+    letters.appendChild(list);
+  }
+}
  var selectCat = function () {
    if (category === Asuult[0]) {
      catagoryName.innerHTML = "Ямар нэртэй хот вэ?";
@@ -47,9 +46,8 @@ window.onload = function () {
        guess.innerHTML = "-";
        space = 1;
      } else {
-       guess.innerHTML = "_";
+       guess.innerHTML = "❌";
      }
-
      geusses.push(guess);
      wordHolder.appendChild(correct);
      correct.appendChild(guess);
@@ -58,7 +56,7 @@ window.onload = function () {
   comments = function () {
    showLives.innerHTML = "Таньд " + lives + " ширхэг амь байна.";
    if (lives <=0) {
-     alert("Та ялагдлаа!");
+     alert("Та ялагдлаа! хариулт нь: "+word+" байлаа.");
      correct.parentNode.removeChild(correct);
      letters.parentNode.removeChild(letters);
      showClue.innerHTML = "";
@@ -80,28 +78,34 @@ window.onload = function () {
    var drawMe = lives ;
    drawArray[drawMe]();
  }
- canvas =  function(){
-
+ canvas = function(){
    myStickman = document.getElementById("stickman");
    context = myStickman.getContext('2d');
    context.beginPath();
    context.strokeStyle = "#fff";
-   context.lineWidth = 2;
  };
  draw = function($pathFromx, $pathFromy, $pathTox, $pathToy) {
    context.moveTo($pathFromx, $pathFromy);
    context.lineTo($pathTox, $pathToy);
    context.stroke(); 
 }
-
-  duujluur1 = function() {
+  duujluur = function() {
     draw (0, 150, 150, 150);
+    context.moveTo(0, 150);
+   context.lineTo(150, $pathToy);
+   context.stroke();
     draw (10, 0, 10, 600);
-  };
-  
-  duujluur2 = function() {
-     draw (0, 5, 70, 5);
-     draw (60, 5, 60, 15);
+    context.moveTo($pathFromx, $pathFromy);
+   context.lineTo($pathTox, $pathToy);
+   context.stroke();
+    draw (0, 5, 70, 5);
+    context.moveTo($pathFromx, $pathFromy);
+   context.lineTo($pathTox, $pathToy);
+   context.stroke();
+    draw (60, 5, 60, 15);
+    context.moveTo($pathFromx, $pathFromy);
+   context.lineTo($pathTox, $pathToy);
+   context.stroke();
   };
   headbody = function() {
     draw (60, 36, 60, 70); 
@@ -119,7 +123,7 @@ window.onload = function () {
     draw (60, 70, 100, 100);
     draw (60, 70, 20, 100);
   };
- drawArray = [hol, gar,  headbody, duujluur2, duujluur1]; 
+ drawArray = [hol,hol, gar,  headbody, duujluur]; 
   check = function () {
    list.onclick = function () {
      var geuss = (this.innerHTML);
@@ -141,7 +145,6 @@ window.onload = function () {
      }
    }
  }
- // Play
  play = function () {
      Asuult = [
        ["УЛААНБААТАР", "ТОКИО", "СӨҮЛ", "БЭЭЖИН","ЛОНДОН", "ПАРИС", "БЭРЛИН", "РОМ", "МАДРИД","ЛИМА", "ВАШИНГТОН", "БРАЗИЛИА","ЖАКАРТА"],
@@ -163,7 +166,6 @@ window.onload = function () {
    canvas();
  }
  play();
- // Hint
    hint.onclick = function() {
      hints = [
        ["АЗИ тив-д байдаг хот","АЗИ тив-д байдаг хот","АЗИ тив-д байдаг хот","АЗИ тив-д байдаг хот","Европ тив-д байдаг хот","Европ тив-д байдаг хот","Европ тив-д байдаг хот","Европ тив-д байдаг хот","Европ тив-д байдаг хот","Америк тив-д байдаг хот"
@@ -184,6 +186,5 @@ window.onload = function () {
    context.clearRect(0, 0, 400, 400);
    play();
  }
-}
 
 
