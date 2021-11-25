@@ -33,7 +33,6 @@ var buttons = function () {
    for (var i = 0; i < word.length; i++) {
      correct.setAttribute('id', 'my-word');
      guess = document.createElement('li');
-     guess.setAttribute('class', 'guess');
      if (word[i] === "-") {
        guess.innerHTML = "━";
        space = 1;
@@ -51,7 +50,7 @@ var buttons = function () {
      alert("Та ялагдлаа! хариулт нь: "+word+" байлаа.");
      correct.parentNode.removeChild(correct);
      letters.parentNode.removeChild(letters);
-     showClue.innerHTML = "&rarr;TIP&larr;";
+     showClue.innerHTML = "";
      context.clearRect(0, 0, 200, 200);
      play();
    }
@@ -60,7 +59,7 @@ var buttons = function () {
          alert("Та яллаа!");
          correct.parentNode.removeChild(correct);
          letters.parentNode.removeChild(letters);
-         showClue.innerHTML = "&rarr;TIP&larr;";
+         showClue.innerHTML = "";
          context.clearRect(0, 0, 200, 200);
          play();
      }
@@ -124,12 +123,10 @@ var buttons = function () {
   check = function () {
    list.onclick = function () {
      var geuss = (this.innerHTML);
-     this.setAttribute("class", "active");
-     this.onclick = null;
      for (var i = 0; i < word.length; i++) {
        if (word[i] === geuss) {
          geusses[i].innerHTML = geuss;
-         counter += 1;
+         counter+=1;
        } 
      }
      var j = (word.indexOf(geuss));
@@ -152,7 +149,6 @@ var buttons = function () {
    word = category[Math.floor(Math.random() * category.length)];
    console.log(word);
    buttons();
-
    geusses = [ ];
    lives = 5;
    counter = 0;
