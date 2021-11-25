@@ -1,14 +1,6 @@
 var alphabet = ['А', 'О', 'У', 'Э', 'Ө', 'Ү', 'Ы', 'И', 'Й', 'Я', 'Е', 'Ё', 'Ю', 'Б', 'В', 'Г', 'Д', 'Ж', 'З', 'К', 'Л', 'М', 'Н'
-                 , 'П', 'Р', 'С', 'Т', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'щ', 'ь', 'ъ'];
-var Asuult; 
-var category;    
-var hints ;      
-var word ;           
-var guess ;             
-var geusses = [ ];    
-var lives ;            
-var counter ;         
-var space;             
+                 , 'П', 'Р', 'С', 'Т', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ь', 'Ъ'];
+var Asuult,category, hints, word, guess, geusses=[ ], lives, counter, space;             
 var showLives = document.getElementById("mylives");
 var showCatagory = document.getElementById("scatagory");
 var hints = document.getElementById("hint");
@@ -43,7 +35,7 @@ var buttons = function () {
      guess = document.createElement('li');
      guess.setAttribute('class', 'guess');
      if (word[i] === "-") {
-       guess.innerHTML = "-";
+       guess.innerHTML = "━";
        space = 1;
      } else {
        guess.innerHTML = "❌";
@@ -60,7 +52,7 @@ var buttons = function () {
      correct.parentNode.removeChild(correct);
      letters.parentNode.removeChild(letters);
      showClue.innerHTML = "";
-     context.clearRect(0, 0, 400, 400);
+     context.clearRect(0, 0, 200, 200);
      play();
    }
    for (var i = 0; i < geusses.length; i++) {
@@ -69,7 +61,7 @@ var buttons = function () {
          correct.parentNode.removeChild(correct);
          letters.parentNode.removeChild(letters);
          showClue.innerHTML = "";
-         context.clearRect(0, 0, 400, 400);
+         context.clearRect(0, 0, 200, 200);
          play();
      }
    }
@@ -84,44 +76,47 @@ var buttons = function () {
    context.beginPath();
    context.strokeStyle = "#fff";
  };
- draw = function($pathFromx, $pathFromy, $pathTox, $pathToy) {
-   context.moveTo($pathFromx, $pathFromy);
-   context.lineTo($pathTox, $pathToy);
-   context.stroke(); 
-}
   duujluur = function() {
-    draw (0, 150, 150, 150);
-    context.moveTo(0, 150);
-   context.lineTo(150, $pathToy);
-   context.stroke();
-    draw (10, 0, 10, 600);
-    context.moveTo($pathFromx, $pathFromy);
-   context.lineTo($pathTox, $pathToy);
-   context.stroke();
-    draw (0, 5, 70, 5);
-    context.moveTo($pathFromx, $pathFromy);
-   context.lineTo($pathTox, $pathToy);
-   context.stroke();
-    draw (60, 5, 60, 15);
-    context.moveTo($pathFromx, $pathFromy);
-   context.lineTo($pathTox, $pathToy);
-   context.stroke();
+    context.moveTo(10, 150);
+    context.lineTo(150, 150);
+    context.stroke();
+    context.moveTo(10, 10);
+    context.lineTo(10, 200);
+    context.stroke();
+    context.moveTo(10, 10);
+    context.lineTo(100, 10);
+    context.stroke();
+    context.moveTo(80, 10);
+    context.lineTo(80, 20);
+    context.stroke();
   };
   headbody = function() {
-    draw (60, 36, 60, 70); 
-    myStickman = document.getElementById("stickman");
-    context = myStickman.getContext('2d');
+    context.moveTo(80, 41);
+    context.lineTo(80, 90);
+    context.stroke();
     context.beginPath();
-    context.arc(60, 25, 10, 0, Math.PI*2, true);
+    context.arc(80, 30, 10, 0, Math.PI*2, true);
     context.stroke();
   };
   gar = function() {
-    draw (60, 46, 100, 50);
-    draw (60, 46, 20, 50);
+    //baruun gar
+    context.moveTo(80, 50);
+    context.lineTo(100, 50);
+    context.stroke();
+    //zuun gar
+    context.moveTo(80, 50);
+    context.lineTo(60, 50);
+    context.stroke();
   };
  hol = function() {
-    draw (60, 70, 100, 100);
-    draw (60, 70, 20, 100);
+   //baruun hol
+    context.moveTo(80, 90);
+    context.lineTo(100, 100);
+    context.stroke();
+    //zuun hol 
+    context.moveTo(80, 90);
+    context.lineTo(60, 100);
+    context.stroke();
   };
  drawArray = [hol,hol, gar,  headbody, duujluur]; 
   check = function () {
@@ -183,7 +178,7 @@ var buttons = function () {
    correct.parentNode.removeChild(correct);
    letters.parentNode.removeChild(letters);
    showClue.innerHTML = "";
-   context.clearRect(0, 0, 400, 400);
+   context.clearRect(0, 0, 200, 200);
    play();
  }
 
