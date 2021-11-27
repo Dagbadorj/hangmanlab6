@@ -1,37 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="design.css" />
-    <script defer src="engine.js"></script>
-    <title>Hangman Game</title>
-  </head>
-  <body>
-    <div class="body">
-      <h1>HANGAMAN 0.00043V</h1>
-        <div class="rbody">
-      <h3>Ашиглагдах үсэгнүүд:</h3>
-      <div class="letters"></div>
-      <p>Таньд хэрэгтэй гэж үзвэл тусламж товчыг дарна уу.</p>
-      <div class="hinttext">
-        <p>Тусламж:-</p>
-        <p class="hint-txt">Sample Hint for test</p>
-      </div>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman</title>
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comforter&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style/home.css">
+</head>
+<body>
+    
+    <div class="wrapper">
+        <div class ="back">
+            <a href="/home.html">Буцах</a>
         </div>
-      <div class="word-div"></div>
-      <h3>Үлдсэн амь: <span class="lives">5</span></h3>
-      <div class="row hint-div">
-        <button class="hint">ТУСЛАМЖ</button>
-        <button class="reset">ДАХИН ЭХЛЭХ</button>
-      </div>
-    </div>
-    <div class="notif hidden">
-      <h2>Та ялагдлаа ! </h2>
-      <h3 class="notif-content">Хүүе! бүр ялчлаашдээ.</h3>
-      <h4>Correct Word: <span class="notif-span"></span></h4>
-      <button class="notif-btn">Дахин тоглох</button>
-    </div>
-  </body>
+        <h1>Hangman</h1>
+     </div>
+     <div class="wrapper">
+       <div class="float-right">Wrong Guesses: <span id='mistakes'>0</span> of 6</div> -->
+
+        <img id="hangmanPic" src=""/>
+        <img id="hangmanPic" src="/image/5.png">
+        <p id="catagoryName"></p>
+        <div id="hold"></div>
+         <div id="buttons"> </div>  
+         <br>
+         <br><br>
+         <br><br>
+        
+         
+         <p id="mylives"></p>
+         <div class="container">
+           <div id="ger" onclick="window.location.reload()">Дахин тоглох</div>
+         </div>
+     </div>
+     <script src="/js/hangman.js"></script>
+</body>
 </html>

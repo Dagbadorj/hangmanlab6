@@ -1,5 +1,6 @@
 var alph = ['А', 'О', 'У', 'Э', 'Ө', 'Ү', 'Ы', 'И', 'Й', 'Я', 'Е', 'Ё', 'Ю', 'Б', 'В', 'Г', 'Д', 'Ж', 'З', 'К', 'Л', 'М', 'Н'
                  , 'П', 'Р', 'С', 'Т', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ь', 'Ъ'];
+var k=0;
 var Asuult,category, hints, word, guess, geusses=[ ], lives, counter, space;             
 var showLives = document.getElementById("mylives");
 var showCatagory = document.getElementById("scatagory");
@@ -117,29 +118,25 @@ var buttons = function () {
     context.stroke();
     //zuun hol 
     context.moveTo(80, 90);
-    context.lineTo(60, 100);
+    context.lineTo(60, 100);  
     context.stroke();
   };
  drawArray = [hol,hol, gar,  headbody, duujluur]; 
   check = function () {
-   list.onclick = function () {
-     var geuss = (this.innerHTML);
-     this.setAttribute("class", "active");
-     this.onclick = null;
-     for (var i = 0; i < word.length; i++) {
-       if (word[i] === geuss) {
-         geusses[i].innerHTML = geuss;
-         counter += 1;
-       } 
-     }
-     var j = (word.indexOf(geuss));
-     if (j === -1) {
-       lives --;
-       animate();
-       comments();
-     } else {
-       comments();
-     }
+      list.onclick = function () {
+        var geuss = (this.innerHTML);
+          if(word[k]===geuss) {
+            geusses[k].innerHTML=geuss;
+            counter += 1;
+            comments();
+            k += 1;
+        }
+        else{
+          alert(word[k] +" "+ geuss);
+          lives -= 1;
+          animate();
+          comments();
+        }
    }
  }
  play = function () {
@@ -152,7 +149,6 @@ var buttons = function () {
    word = category[Math.floor(Math.random() * category.length)];
    console.log(word);
    buttons();
-
    geusses = [ ];
    lives = 5;
    counter = 0;

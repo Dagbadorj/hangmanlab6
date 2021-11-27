@@ -1,111 +1,160 @@
-const letterDiv = document.querySelector('.letters');
-const hintButton = document.querySelector('.hint');
-const resetButton = document.querySelector('.reset');
-const hintDiv = document.querySelector('.hinttext');
-const hintText = document.querySelector('.hint-txt');
-const liveSpan = document.querySelector('.lives');
-const wordDiv = document.querySelector('.word-div');
-const notif = document.querySelector('.notif');
-const notifContent = document.querySelector('.notif-content');
-const notifSpan = document.querySelector('.notif-span');
-const playAgain = document.querySelector('.notif-btn');
-let letters;
-let lives;
-const words = new Map([
-  ['УЛААНБААТАР','АЗИ тив-д байдаг хот'], 
-  ['ТОКИО', 'АЗИ тив-д байдаг хот'],
-  ['СӨҮЛ','АЗИ тив-д байдаг хот'], 
-  ['БЭЭЖИН','АЗИ тив-д байдаг хот'],
-  ['ЛОНДОН', 'ЕФРОП тив-д байдаг хот'],
-  ['ПАРИС', 'ЕФРОП тив-д байдаг хот'],
-  ['БЭРЛИН', 'ЕФРОП тив-д байдаг хот'],
-  ['РОМ', 'ЕФРОП тив-д байдаг хот'],
-  ['МАДРИД','ЕФРОП тив-д байдаг хот'],
-  ['ЛИМА', 'АМЕРИК тив-д байдаг хот'],
-  ['ВАШИНГТОН', 'АМЕРИК тив-д байдаг хот'],
-  ['БРАЗИЛИА','АМЕРИК тив-д байдаг хот'],
-  ['ЖАКАРТА','АМЕРИК тив-д байдаг хот'],
-]);
-const word_list = [...words.keys()];
-const getRandomWord = function (list) {
-  return list[Math.floor(Math.random() * word_list.length)];
-};
-let select_word;
-const init = function (state) {
-  wordDiv.innerHTML = '';
-  if (state === 'start') {
-    for (const i of 'АОУЭӨҮЫИЙЯЕЁЮБВГДЖЗКЛМНПРСТФХЦЧШщьъ') {
-      const html = `<button class="alpha">${i.toUpperCase()}</button>`;
-      letterDiv.insertAdjacentHTML('beforeend', html);
-    }
-  } else if (state === 'reset') {
-    letters.forEach(btn => {
-      btn.classList.remove('disabled');
-      hintDiv.classList.add('hidden');
-      notif.classList.add('hidden');
-    });
-  }
-  select_word = getRandomWord(word_list);
-  lives = 5;
-  letters = document.querySelectorAll('.alpha');
-  liveSpan.textContent = lives;
-  for (let i = 0; i < select_word.length; i++) {
-    const html = `<p class="word">_</p>`;
-    wordDiv.insertAdjacentHTML('beforeend', html);
-  }
-};
-init('start');
-const showNotif = function (msg) {
-  notif.classList.remove('hidden');
-  notifSpan.textContent = select_word;
-  notifContent.textContent = `You ${msg}`;
-  lives = 3;
-};
-const decreaseLife = function () {
-  lives--;
-  liveSpan.textContent = lives;
-  if (lives === 0) {
-    showNotif('lost');
-  }
-};
-const getindexes = function (letter) {
-  let indexes = [];
-  [...select_word].forEach((val, i) => {
-    if (val === letter) {
-      const index = i;
-      indexes.push(index);
-    }
-  });
-  return indexes;
-};
-const checkWord = function () {
-  let val = true;
-  for (let i = 0; i < wordDiv.children.length; i++) {
-    if (wordDiv.children[i].textContent === '_') {
-      val = false;
+window.onload = function () {
+
+  var alphabet = ['а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж',
+'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'ө', 'п', 'р',
+'с', 'т', 'у', 'ү', 'ф', 'х', 'ц', 'ч','ш','щ','ъ','ь','ы','э','ю','я','-'];
+  
+  var categories;         
+  var chosenCategory;    
+  var getHint ;          
+  var word ;              
+  var guess ;            
+  var guesses = [ ];      
+  var lives ;             
+  var counter ;          
+  var space;             
+  guess
+  // Get elements
+  var showLives = document.getElementById("mylives");
+  var showCatagory = document.getElementById("scatagory");
+  // var getHint = document.getElementById("hint");
+  // var showClue = document.getElementById("clue");
+
+
+
+  // create alphabet ul
+  var buttons = function () {
+    myButtons = document.getElementById('buttons');
+    letters = document.createElement('ul');
+
+    for (var i = 0; i < alphabet.length; i++) {
+      letters.id = 'alphabet';
+      list = document.createElement('li');
+      list.id = 'letter';
+      list.innerHTML = alphabet[i];
+      check();
+      myButtons.appendChild(letters);
+      letters.appendChild(list);
     }
   }
-  return val;
-};
-const letterPress = function () {
-  const letter = this.textContent.toLowerCase();
-  if (select_word.includes(letter)) {
-    const indexes_list = getindexes(letter);
-    indexes_list.forEach((val, i)=>{
-      wordDiv.children[val].textContent = this.textContent;
-    });
-    if (checkWord()) showNotif('won');
-  } else 
-  {
-    decreaseLife();
+    
+  
+  // Select Catagory
+  var selectCat = function () {
+      if (chosenCategory === categories[0]) {
+        catagoryName.innerHTML = "Жавхлан багш гоё багш тэ ? ";
+      } else if (chosenCategory === categories[1]) {
+        catagoryName.innerHTML = "Хамгийн анх сансарт гарсан хүний нэр";
+      } else if (chosenCategory === categories[2]) {
+        catagoryName.innerHTML = "2 цагийн хугацаанд 5879 удаа нэг үйлдэлийг хийж геннисийн номонд бичигдсэн тэр ямар үйлдэл вэ ?";
+      }
+      else if(chosenCategory === categories[3]){
+        catagoryName.innerHTML = "Харанхуйд хамгийн холоос тод харагддаг гэрэл"
+      }
+      else if(chosenCategory === categories[4]){
+          catagoryName.innerHTML = "Эхийн санаа үрд үрийн санаа хэнд гэдэг вэ ?"
+        }
+
+    }
+
+  // Create guesses ul
+   result = function () {
+    wordHolder = document.getElementById('hold');
+    correct = document.createElement('ul');
+
+    for (var i = 0; i < word.length; i++) {
+      correct.setAttribute('id', 'my-word');
+      guess = document.createElement('li');
+      guess.setAttribute('class', 'guess');
+      if (word[i] === "-") {
+        guess.innerHTML = "-";  
+        space = 1;
+      } else {
+        guess.innerHTML = "_";
+      }
+
+      guesses.push(guess);
+      wordHolder.appendChild(correct);
+      correct.appendChild(guess);
+    }
   }
-  this.classList.add('disabled');};
-letters.forEach(btn => {
-  btn.addEventListener('click', letterPress);});
-hintButton.addEventListener('click', function () {
-  hintDiv.classList.remove('hidden');
-  hintText.textContent = words.get(select_word);});
-resetButton.addEventListener('click', function () {
-  init('reset');});
-playAgain.addEventListener('click', function () {
-  init('reset');});
+  
+  // Show lives
+   comments = function () {
+    showLives.innerHTML = "Таньд " + lives + " амь байна";
+    if (lives < 1) {
+      showLives.innerHTML = "Та ялагдлаа!!!";
+    }
+    for (var i = 0; i < guesses.length; i++) {
+      if (counter + space === guesses.length) {
+        showLives.innerHTML = "Та ялж чадлаа баяр хүргэе!!!";
+      }
+    }
+  }
+  var l=0;
+  var t=0;
+  // OnClick Function
+   check = function () {
+    list.onclick = function () {
+      var guess = (this.innerHTML);
+      this.setAttribute("class", "active");
+      if(word[t]==guess)
+      {
+        comments();
+      }
+      else{
+        
+        alert(word[t] +" "+ guess);
+        alert(word);
+
+        lives -= 1;
+        document.getElementById("hangmanPic").src= '/image/' + lives + '.png';
+        comments();
+      }
+        if (word[t] === guess) {
+          guesses[l].innerHTML = guess;
+          counter += 1;
+          t++;
+          l++;
+      }
+    
+    }
+  }
+
+  
+
+  play = function () {
+      categories = [
+          ["тийм"],
+          ["баба-яага"],
+          ["зүү сүвлэх"],
+          ["лааны гэрэл"],
+          ["сүмбээд"]
+      ];
+  
+      chosenCategory = categories[Math.floor(Math.random() * categories.length)];
+      word = chosenCategory[Math.floor(Math.random() * chosenCategory.length)];
+      word = word.replace(/\s/g, "-");
+      console.log(word);
+      buttons();
+  
+      guesses = [ ];
+      lives = 5;
+      counter = 0;
+      space = 0;
+      result();
+      comments();
+      selectCat();
+      // updateHangmanPicture();
+    }
+  
+    play();
+
+    document.getElementById('reset').onclick = function() {
+      correct.parentNode.removeChild(correct);
+      letters.parentNode.removeChild(letters);
+      showClue.innerHTML = "&rarr;TIP&larr;";
+      context.clearRect(0, 0, 200, 200);
+      play();
+    }
+}

@@ -124,7 +124,7 @@ var buttons = function () {
    list.onclick = function () {
      var geuss = (this.innerHTML);
      for (var i = 0; i < word.length; i++) {
-       if (word[i] === geuss) {
+       if (word[i] == geuss) {
          geusses[i].innerHTML = geuss;
          counter+=1;
        } 
